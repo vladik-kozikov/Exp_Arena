@@ -27635,7 +27635,9 @@ MonoBehaviour:
   boostCoefficient: 10
   gConstant: 10
   fallDownCoefficient: 3
-  jumpForce: 80
+  jumpHeigth: 10
+  jumpTimeCoefficient: 0.1
+  jumpForce: 40
   jumpDecreaseCoefficent: 1
   distanceToGround: 1
   invertMouse: 0
@@ -27664,7 +27666,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978142337}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cefca7e43f9abec47923683b1186e86b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

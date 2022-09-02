@@ -11,7 +11,10 @@ public class PMoveController : MonoBehaviour
     //Jump
     public float gConstant = 10;
     public float fallDownCoefficient;
+    public float jumpHeigth;
+    public float jumpTimeCoefficient;  
     public float jumpForce;
+    
     public float jumpDecreaseCoefficent;
     public float distanceToGround;
     //Mouse
@@ -37,8 +40,11 @@ public class PMoveController : MonoBehaviour
 
     private Vector3 velocity;
     private Vector3 jumpVelocity;
+
+    float _jumpForce;
     float jumpLength;
     float _gconst;
+
     bool isGrounded = false;
     private Rigidbody rb;
     
@@ -92,19 +98,21 @@ public class PMoveController : MonoBehaviour
 
     void MoveFixed()
     {
+
       // velocity =(gameObject.transform.forward * Input.GetAxis("Vertical") + gameObject.transform.right * Input.GetAxis("Horizontal")) * movementSpeed + Vector3.down*gConstant;
         velocity.x = ((Vector3.up * jumpLength + gameObject.transform.forward * Input.GetAxis("Vertical") + gameObject.transform.right * Input.GetAxis("Horizontal")) * movementSpeed + Vector3.down * _gconst ).x;
         velocity.z = ((Vector3.up * jumpLength + gameObject.transform.forward * Input.GetAxis("Vertical") + gameObject.transform.right * Input.GetAxis("Horizontal")) * movementSpeed + Vector3.down * _gconst ).z;
-        velocity.y = jumpLength + (Vector3.down * _gconst).y;
+        velocity.y = _jumpForce + (Vector3.down * _gconst).y;
 
         if (jumpLength > 0)
         {
-
-            jumpLength = jumpLength + (Vector3.down * gConstant / jumpDecreaseCoefficent).y;
-
+            _jumpForce = jumpForce;
+            jumpLength = jumpLength + (Vector3.down * gConstant * jumpDecreaseCoefficent).y;
+            _gconst = gConstant;
         }
         else
         {
+            _jumpForce = 0;
             if (!GroundCheck()) _gconst = gConstant * fallDownCoefficient;
             else _gconst = gConstant / fallDownCoefficient;
             jumpLength = 0; }
@@ -154,19 +162,27 @@ public class PMoveController : MonoBehaviour
     {
         if (GroundCheck())
         {
-            jumpLength = jumpForce;
+            jumpLength = jumpHeigth/jumpTimeCoefficient;
+            
         }
     }
-
+/*void LinearJump()
+    {
+       // if (GroundCheck()) LinearSpeedUp(jumpForce, flyUpCoefficient);
+    }*/
     void InstantSpeedUp()
     {
         movementSpeed += boostCoefficient;
-
+        
     }
     void InstantSlowDown()
     {
         movementSpeed -= boostCoefficient;
     }
-    
+    float _currStep = 0;
+    float LinearSpeedUp(float _maxVal, float _step)
+    {if (_currStep! > _maxVal) _currStep += _step;
+        return _currStep;
+    }
 
 }
