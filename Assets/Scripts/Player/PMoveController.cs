@@ -14,8 +14,10 @@ public class PMoveController : MonoBehaviour
     public float jumpHeigth;
     public float jumpTimeCoefficient;  
     public float jumpForce;
-    
+    public float jumpChargeTime;
     public float jumpDecreaseCoefficent;
+    public bool isJumpChargable = false;
+
     public float distanceToGround;
     //Mouse
     public bool invertMouse;
@@ -44,7 +46,7 @@ public class PMoveController : MonoBehaviour
     float _jumpForce;
     float jumpLength;
     float _gconst;
-
+    float jumpBufferTime;
     bool isGrounded = false;
     private Rigidbody rb;
     
@@ -71,11 +73,19 @@ public class PMoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_gconst);
+
+        if(isJumpChargable)ChargeJump();
         CameraRotate();
         if (Input.GetKeyUp(dashButton) && dash != null) InstantSlowDown();
         if (Input.GetKeyDown(dashButton) && dash != null) dash.Invoke();
-        if (Input.GetKeyDown(jumpButton) && jump != null) jump.Invoke();
+
+
+        if (isJumpChargable) { if (Input.GetKeyDown(jumpButton) && jump != null) isJumpChargeBegan = true; }
+        if (isJumpChargable) { if (Input.GetKeyUp(jumpButton) && jump != null) jump.Invoke(); }
+
+        if(isJumpChargable == false )if (Input.GetKeyDown(jumpButton) && jump != null) jump.Invoke();
+
+
         if (Input.GetKeyDown(shootButton) && shoot != null) shoot.Invoke();
         isGrounded = GroundCheck();
         rb.velocity = velocity;
@@ -158,13 +168,35 @@ public class PMoveController : MonoBehaviour
             return false;
         }
     }
+
+
+    bool isJumpChargeBegan;
+    void ChargeJump()
+    {
+        if(isJumpChargeBegan)
+        if (jumpChargeTime > jumpBufferTime)
+        {
+            jumpBufferTime += Time.deltaTime;
+        }
+        else
+        {
+            jumpBufferTime = jumpChargeTime;
+                isJumpChargeBegan = false;
+        }
+
+        
+    }
     void Jump()
     {
+
         if (GroundCheck())
         {
-            jumpLength = jumpHeigth/jumpTimeCoefficient;
-            
+            if (isJumpChargable) jumpLength = (jumpHeigth / jumpTimeCoefficient) * (jumpBufferTime / jumpChargeTime);
+            else jumpLength = jumpHeigth / jumpTimeCoefficient;
+
+
         }
+        jumpBufferTime = 0;
     }
 /*void LinearJump()
     {
