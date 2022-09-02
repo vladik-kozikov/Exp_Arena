@@ -27631,14 +27631,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6263faa92e0694098572df231e821d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 30
+  movementSpeed: 10
+  boostCoefficient: 10
   gConstant: 10
-  jumpForce: 40
-  jumpDecreaseCoefficent: 4
+  fallDownCoefficient: 3
+  jumpForce: 80
+  jumpDecreaseCoefficent: 1
   distanceToGround: 1
   invertMouse: 0
   mouseSensitivity: 1
   jumpButton: 32
+  dashButton: 304
   shootButton: 323
   jump:
     m_PersistentCalls:

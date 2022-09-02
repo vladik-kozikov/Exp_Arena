@@ -5,14 +5,20 @@ using UnityEngine.Events;
 
 public class PMoveController : MonoBehaviour
 {
-
+    //Run
     public float movementSpeed;
+    public float boostCoefficient;
+    //Jump
     public float gConstant = 10;
+    public float fallDownCoefficient;
     public float jumpForce;
     public float jumpDecreaseCoefficent;
     public float distanceToGround;
+    //Mouse
     public bool invertMouse;
     public float mouseSensitivity;
+
+
 
     public KeyCode jumpButton;
     //public KeyCode WASD;
@@ -32,18 +38,23 @@ public class PMoveController : MonoBehaviour
     private Vector3 velocity;
     private Vector3 jumpVelocity;
     float jumpLength;
+    float _gconst;
     bool isGrounded = false;
     private Rigidbody rb;
+    
     void Awake()
     {
         move.AddListener(MoveFixed);
         jump.AddListener(Jump);
+        dash.AddListener(InstantSpeedUp);
         rb = gameObject.GetComponent<Rigidbody>();
 
     }
     // Start is called before the first frame update
     void Start()
     {
+        if (!GroundCheck()) _gconst = gConstant * fallDownCoefficient;
+        else _gconst = gConstant;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Input.ResetInputAxes();
@@ -54,9 +65,10 @@ public class PMoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(_gconst);
         CameraRotate();
-        if(Input.GetKeyDown(dashButton) && dash!= null)
+        if (Input.GetKeyUp(dashButton) && dash != null) InstantSlowDown();
+        if (Input.GetKeyDown(dashButton) && dash != null) dash.Invoke();
         if (Input.GetKeyDown(jumpButton) && jump != null) jump.Invoke();
         if (Input.GetKeyDown(shootButton) && shoot != null) shoot.Invoke();
         isGrounded = GroundCheck();
@@ -77,14 +89,27 @@ public class PMoveController : MonoBehaviour
         if (jumpLength > 0) jumpLength = jumpLength - jumpLength * Time.deltaTime * 100f;
         else jumpLength = 0;
     }
+
     void MoveFixed()
     {
       // velocity =(gameObject.transform.forward * Input.GetAxis("Vertical") + gameObject.transform.right * Input.GetAxis("Horizontal")) * movementSpeed + Vector3.down*gConstant;
-        velocity.x = ((Vector3.up * jumpLength + gameObject.transform.forward * Input.GetAxis("Vertical") + gameObject.transform.right * Input.GetAxis("Horizontal")) * movementSpeed + Vector3.down * gConstant ).x;
-        velocity.z = ((Vector3.up * jumpLength + gameObject.transform.forward * Input.GetAxis("Vertical") + gameObject.transform.right * Input.GetAxis("Horizontal")) * movementSpeed + Vector3.down * gConstant ).z;
-        velocity.y = jumpLength + (Vector3.down * gConstant).y;
-        if (jumpLength > 0) jumpLength = jumpLength + (Vector3.down * gConstant/jumpDecreaseCoefficent).y;
-        else jumpLength = 0;
+        velocity.x = ((Vector3.up * jumpLength + gameObject.transform.forward * Input.GetAxis("Vertical") + gameObject.transform.right * Input.GetAxis("Horizontal")) * movementSpeed + Vector3.down * _gconst ).x;
+        velocity.z = ((Vector3.up * jumpLength + gameObject.transform.forward * Input.GetAxis("Vertical") + gameObject.transform.right * Input.GetAxis("Horizontal")) * movementSpeed + Vector3.down * _gconst ).z;
+        velocity.y = jumpLength + (Vector3.down * _gconst).y;
+
+        if (jumpLength > 0)
+        {
+
+            jumpLength = jumpLength + (Vector3.down * gConstant / jumpDecreaseCoefficent).y;
+
+        }
+        else
+        {
+            if (!GroundCheck()) _gconst = gConstant * fallDownCoefficient;
+            else _gconst = gConstant / fallDownCoefficient;
+            jumpLength = 0; }
+
+
     }
 
 
@@ -132,5 +157,16 @@ public class PMoveController : MonoBehaviour
             jumpLength = jumpForce;
         }
     }
+
+    void InstantSpeedUp()
+    {
+        movementSpeed += boostCoefficient;
+
+    }
+    void InstantSlowDown()
+    {
+        movementSpeed -= boostCoefficient;
+    }
+    
 
 }
