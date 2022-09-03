@@ -34,7 +34,8 @@ public class PMoveController : MonoBehaviour
     public UnityEvent move;
     public UnityEvent shoot;
     public UnityEvent dash;
-
+    public UnityEvent recieveDamage;
+    public UnityEvent die;
 
     public GameObject cameraObject;
     public GameObject feet;

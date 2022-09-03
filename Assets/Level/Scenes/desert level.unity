@@ -20681,16 +20681,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AddBulletSpread: 0
+  damage: 0
   BulletSpreadVariance: {x: 0, y: 0, z: 0}
   directionPoint: {fileID: 1708072370}
   ShootingSystem: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   BulletSpawnPoint: {fileID: 1238034988}
   ImpactParticleSystem: {fileID: 9064919875212695174, guid: a5e1e2c4d2cd81f4abed6272a2b8187a, type: 3}
   BulletTrail: {fileID: 328621789431213768, guid: 971dbe0f5a773434b8dcc8c9f8676086, type: 3}
-  ShootDelay: 0.5
+  ShootDelay: 0.01
   Mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147483647
   BulletSpeed: 100
 --- !u!95 &733053331
 Animator:
@@ -27748,6 +27749,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   dash:
+    m_PersistentCalls:
+      m_Calls: []
+  recieveDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  die:
     m_PersistentCalls:
       m_Calls: []
   cameraObject: {fileID: 963194225}

@@ -8,6 +8,8 @@ public class PShootingController : MonoBehaviour
    
     public bool AddBulletSpread = true;
 
+    public float damage;
+
     public Vector3 BulletSpreadVariance = new Vector3(0f, 0f, 0f);
     public Transform directionPoint;
     public ParticleSystem ShootingSystem;
@@ -42,7 +44,7 @@ public class PShootingController : MonoBehaviour
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
 
-            if (Physics.Raycast(BulletSpawnPoint.position, direction, out RaycastHit hit, float.MaxValue, Mask))
+            if (Physics.Raycast(BulletSpawnPoint.position, direction-BulletSpawnPoint.position, out RaycastHit hit, float.MaxValue, Mask))
             {
                 TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
 
@@ -55,7 +57,7 @@ public class PShootingController : MonoBehaviour
             {
                 TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
 
-                StartCoroutine(SpawnTrail(trail, (directionPoint.position-BulletSpawnPoint.position).normalized*100, Vector3.zero, false));
+                StartCoroutine(SpawnTrail(trail, directionPoint.position+(directionPoint.position-BulletSpawnPoint.position)*100f, Vector3.zero, false));
 
                 LastShootTime = Time.time;
             }
@@ -65,7 +67,6 @@ public class PShootingController : MonoBehaviour
     private Vector3 GetDirection()
     {
         Vector3 direction = directionPoint.position;
-
         if (AddBulletSpread)
         {
             direction += new Vector3(
