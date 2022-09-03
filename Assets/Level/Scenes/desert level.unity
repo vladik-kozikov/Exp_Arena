@@ -27638,8 +27638,9 @@ MonoBehaviour:
   jumpHeigth: 10
   jumpTimeCoefficient: 0.1
   jumpForce: 40
-  jumpChargeTime: 2
+  jumpChargeTime: 1
   jumpDecreaseCoefficent: 1
+  isJumpChargable: 0
   distanceToGround: 1
   invertMouse: 0
   mouseSensitivity: 1

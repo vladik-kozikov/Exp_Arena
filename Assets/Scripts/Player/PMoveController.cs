@@ -13,7 +13,7 @@ public class PMoveController : MonoBehaviour
     public float fallDownCoefficient;
     public float jumpHeigth;
     public float jumpTimeCoefficient;  
-    public readonly float jumpForce;
+    public float jumpForce;
     public float jumpChargeTime;
     public float jumpDecreaseCoefficent;
     public bool isJumpChargable = false;
@@ -43,10 +43,10 @@ public class PMoveController : MonoBehaviour
     private Vector3 velocity;
     private Vector3 jumpVelocity;
 
-    float _jumpForce;
-    float jumpLength;
+    float _jumpForce = 0;
+    float jumpLength = 0;
     float _gconst;
-    float jumpBufferTime;
+    float jumpBufferTime = 0;
     bool isGrounded = false;
     private Rigidbody rb;
     
@@ -61,6 +61,7 @@ public class PMoveController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        jumpBufferTime = jumpChargeTime;
         if (!GroundCheck()) _gconst = gConstant * fallDownCoefficient;
         else _gconst = gConstant;
         Cursor.visible = false;
