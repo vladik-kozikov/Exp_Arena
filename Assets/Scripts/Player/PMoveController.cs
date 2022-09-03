@@ -78,6 +78,9 @@ public class PMoveController : MonoBehaviour
         /*if(isJumpChargable)*/
         ChargeJump();
         CameraRotate();
+
+        if (Input.GetKeyDown(shootButton) && shoot != null) shoot.Invoke();
+
         if (Input.GetKeyUp(dashButton) && dash != null) InstantSlowDown();
         if (Input.GetKeyDown(dashButton) && dash != null) dash.Invoke();
 
