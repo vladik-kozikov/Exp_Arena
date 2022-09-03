@@ -84,7 +84,7 @@ public class PMoveController : MonoBehaviour
         if (isJumpChargable) { if (Input.GetKeyUp(jumpButton) && jump != null) jump.Invoke(); }
 
         if(isJumpChargable == false )if (Input.GetKeyDown(jumpButton) && jump != null) jump.Invoke();
-
+        if (isJumpChargable == false) if (Input.GetKeyUp(jumpButton) && jump != null) jumpLength = 0 ;
 
         if (Input.GetKeyDown(shootButton) && shoot != null) shoot.Invoke();
         isGrounded = GroundCheck();
@@ -193,15 +193,13 @@ public class PMoveController : MonoBehaviour
         {
             if (isJumpChargable) jumpLength = (jumpHeigth / jumpTimeCoefficient) * (jumpBufferTime / jumpChargeTime);
             else jumpLength = jumpHeigth / jumpTimeCoefficient;
-
-
         }
         jumpBufferTime = 0;
     }
-/*void LinearJump()
+    void LinearJump()
     {
-       // if (GroundCheck()) LinearSpeedUp(jumpForce, flyUpCoefficient);
-    }*/
+        
+    }
     void InstantSpeedUp()
     {
         movementSpeed += boostCoefficient;
@@ -216,5 +214,5 @@ public class PMoveController : MonoBehaviour
     {if (_currStep! > _maxVal) _currStep += _step;
         return _currStep;
     }
-
+    
 }
