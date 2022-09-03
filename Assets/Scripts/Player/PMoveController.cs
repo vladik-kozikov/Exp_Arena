@@ -13,7 +13,7 @@ public class PMoveController : MonoBehaviour
     public float fallDownCoefficient;
     public float jumpHeigth;
     public float jumpTimeCoefficient;  
-    public float jumpForce;
+    public readonly float jumpForce;
     public float jumpChargeTime;
     public float jumpDecreaseCoefficent;
     public bool isJumpChargable = false;
@@ -68,13 +68,14 @@ public class PMoveController : MonoBehaviour
         Input.ResetInputAxes();
         jumpVelocity = new Vector3(0, 0, 0);
     }
-    
-    
+
+
     // Update is called once per frame
     void Update()
     {
-
-        if(isJumpChargable)ChargeJump();
+        if(!isJumpChargable)jumpForce = jumpHeigth / jumpChargeTime;
+        /*if(isJumpChargable)*/
+        ChargeJump();
         CameraRotate();
         if (Input.GetKeyUp(dashButton) && dash != null) InstantSlowDown();
         if (Input.GetKeyDown(dashButton) && dash != null) dash.Invoke();
@@ -83,8 +84,9 @@ public class PMoveController : MonoBehaviour
         if (isJumpChargable) { if (Input.GetKeyDown(jumpButton) && jump != null) isJumpChargeBegan = true; }
         if (isJumpChargable) { if (Input.GetKeyUp(jumpButton) && jump != null) jump.Invoke(); }
 
-        if(isJumpChargable == false )if (Input.GetKeyDown(jumpButton) && jump != null) jump.Invoke();
-        if (isJumpChargable == false) if (Input.GetKeyUp(jumpButton) && jump != null) jumpLength = 0 ;
+        if (isJumpChargable == false) if (Input.GetKeyDown(jumpButton) && jump != null)
+            { isJumpChargeBegan = true; jump.Invoke(); }
+        if (isJumpChargable == false) if (Input.GetKeyUp(jumpButton) && jump != null) { jumpLength = 0; jumpBufferTime = jumpChargeTime; isJumpChargeBegan = false; }
 
         if (Input.GetKeyDown(shootButton) && shoot != null) shoot.Invoke();
         isGrounded = GroundCheck();
@@ -116,9 +118,20 @@ public class PMoveController : MonoBehaviour
 
         if (jumpLength > 0)
         {
-            _jumpForce = jumpForce;
-            jumpLength = jumpLength + (Vector3.down * gConstant * jumpDecreaseCoefficent).y;
-            _gconst = gConstant;
+            if (!isJumpChargable)
+            {
+                if (isJumpChargeBegan) _jumpForce = jumpForce *  (1-(jumpBufferTime)/jumpChargeTime);
+                else _jumpForce = 0;
+                jumpLength = jumpLength + (Vector3.down * gConstant * jumpDecreaseCoefficent).y;
+
+            }
+            else
+            {
+                if(isJumpChargable)_jumpForce = jumpForce;
+                jumpLength = jumpLength + (Vector3.down * gConstant * jumpDecreaseCoefficent).y;
+                _gconst = gConstant;
+            }
+
         }
         else
         {
@@ -180,7 +193,8 @@ public class PMoveController : MonoBehaviour
         }
         else
         {
-            jumpBufferTime = jumpChargeTime;
+                if (isJumpChargable) jumpBufferTime = jumpChargeTime;
+                else { jumpBufferTime = jumpChargeTime; jumpLength = 0; }
                 isJumpChargeBegan = false;
         }
 
@@ -191,9 +205,10 @@ public class PMoveController : MonoBehaviour
 
         if (GroundCheck())
         {
-            if (isJumpChargable) jumpLength = (jumpHeigth / jumpTimeCoefficient) * (jumpBufferTime / jumpChargeTime);
-            else jumpLength = jumpHeigth / jumpTimeCoefficient;
+           jumpLength = (jumpHeigth / jumpTimeCoefficient) * (jumpBufferTime / jumpChargeTime);
+            
         }
+        //if(isJumpChargable)
         jumpBufferTime = 0;
     }
     void LinearJump()
