@@ -27715,10 +27715,10 @@ MonoBehaviour:
   boostCoefficient: 10
   gConstant: 10
   fallDownCoefficient: 3
-  jumpHeigth: 10
+  jumpHeigth: 20
   jumpTimeCoefficient: 0.1
   jumpForce: 40
-  jumpChargeTime: 1
+  jumpChargeTime: 0.2
   jumpDecreaseCoefficent: 1
   isJumpChargable: 0
   distanceToGround: 1
