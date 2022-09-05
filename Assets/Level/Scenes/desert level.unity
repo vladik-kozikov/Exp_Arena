@@ -5543,9 +5543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06f08320bc483c4fb556b6ebbcf78dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainAim: {fileID: 0}
-  WriteAim: {fileID: 0}
-  RedAim: {fileID: 0}
+  MainAim: {fileID: 809865562}
+  WriteAim: {fileID: 809865562}
+  RedAim: {fileID: 315934838}
   Timer: {fileID: 1635912450}
   LevelBar: {fileID: 0}
   hpbar:

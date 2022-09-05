@@ -1,3 +1,4 @@
+using Assets.Scripts.Ui;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -106,8 +107,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-
-
     private void ResetAttack()
     {
         alreadyAttacked = false;
@@ -115,11 +114,11 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-
         health -= damage;
         if (getDamage != null) { getDamage.Invoke(); }
-        if (health <= 0) { if (die != null) { die.Invoke(); } Invoke(nameof(DestroyEnemy), 0.5f); }
+        if (health <= 0) { if (die != null) { die.Invoke(); } Invoke(nameof(DestroyEnemy), 0); ControllerUi.instanse.SetRedAim(); }
     }
+
     private void DestroyEnemy()
     {
         Destroy(gameObject);
@@ -137,6 +136,8 @@ public class EnemyController : MonoBehaviour
         if (other.transform.tag == "Bullet")
         {
             TakeDamage(other.transform.GetComponent<BulletSetup>().damage);
+            Debug.Log("True");
+            ControllerUi.instanse.SetWriteAim();
         }
     }
 }

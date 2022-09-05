@@ -217,7 +217,6 @@ public class PMoveController : MonoBehaviour
         {
            jumpLength = (jumpHeigth / jumpTimeCoefficient) * (jumpBufferTime / jumpChargeTime);
 
-            Debug.Log($"Jump True {jumpLength}");
 
         }
         //if(isJumpChargable)
@@ -230,13 +229,11 @@ public class PMoveController : MonoBehaviour
     void InstantSpeedUp()
     {
         movementSpeed += boostCoefficient;
-        Debug.Log($"Speed True {movementSpeed}  boostCoefficient {boostCoefficient}"); 
 
     }
     void InstantSlowDown()
     {
         movementSpeed -= boostCoefficient;
-        Debug.Log($"Jump True {movementSpeed}   boostCoefficient {boostCoefficient}");
     }
     float _currStep = 0;
     float LinearSpeedUp(float _maxVal, float _step)
