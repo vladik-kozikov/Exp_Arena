@@ -124,14 +124,16 @@ namespace Assets.Scripts.Ui
         public void ChangesLevelBar()
         {
            int AddPlayerExp = CountAddLevel;
-            if (AddPlayerExp >= 10)
+            CountPlayerExp += AddPlayerExp;
+
+            if (CountPlayerExp >= 10)
             {
-                AddPlayerExp += AddPlayerExp - 10;
+                CountPlayerExp -= 10;
                 LevelExp++;
                 _uIData.Level.text = LevelExp.ToString();
             }
 
-            CountPlayerExp += AddPlayerExp;
+           
             float CountAddExp = CountPlayerExp;
             CountAddExp = CountAddExp / 10;
             _uIData.LevelBar.fillAmount = CountAddExp;
