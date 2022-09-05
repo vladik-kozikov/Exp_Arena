@@ -1,3 +1,4 @@
+using Assets.Scripts.Ui;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,7 +51,9 @@ public class PMoveController : MonoBehaviour
     float jumpBufferTime = 0;
     bool isGrounded = false;
     private Rigidbody rb;
-    
+
+    private UIData _uIData;
+
     void Awake()
     {
         move.AddListener(MoveFixed);
@@ -69,6 +72,8 @@ public class PMoveController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Input.ResetInputAxes();
         jumpVelocity = new Vector3(0, 0, 0);
+
+        _uIData = UIData.instanse;
     }
 
 
@@ -211,7 +216,9 @@ public class PMoveController : MonoBehaviour
         if (GroundCheck())
         {
            jumpLength = (jumpHeigth / jumpTimeCoefficient) * (jumpBufferTime / jumpChargeTime);
-            
+
+            Debug.Log($"Jump True {jumpLength}");
+
         }
         //if(isJumpChargable)
         jumpBufferTime = 0;
@@ -223,16 +230,48 @@ public class PMoveController : MonoBehaviour
     void InstantSpeedUp()
     {
         movementSpeed += boostCoefficient;
-        
+        Debug.Log($"Speed True {movementSpeed}  boostCoefficient {boostCoefficient}"); 
+
     }
     void InstantSlowDown()
     {
         movementSpeed -= boostCoefficient;
+        Debug.Log($"Jump True {movementSpeed}   boostCoefficient {boostCoefficient}");
     }
     float _currStep = 0;
     float LinearSpeedUp(float _maxVal, float _step)
     {if (_currStep! > _maxVal) _currStep += _step;
         return _currStep;
     }
-    
+
+
+
+    //TODO
+    private bool _isAimUpCor;
+    [SerializeField] private int TestCountElement;
+    [SerializeField] private float TestTimeElement;
+
+
+    private IEnumerator AimUp(bool isAimUp)
+    {
+        _isAimUpCor = true;
+
+        for (int i = 0; i < TestCountElement; i++)
+        {
+            if (isAimUp)
+            {
+                //_uIData.MainAim.rectTransform.anchoredPosition; 
+            }
+            else
+            {
+
+            }
+       
+        yield return new WaitForSeconds(TestTimeElement);
+
+        }
+        _isAimUpCor = false;
+
+    }
+
 }
