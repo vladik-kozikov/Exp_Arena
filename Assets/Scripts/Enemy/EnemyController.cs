@@ -116,7 +116,7 @@ public class EnemyController : MonoBehaviour
     {
         health -= damage;
         if (getDamage != null) { getDamage.Invoke(); }
-        if (health <= 0) { if (die != null) { die.Invoke(); } Invoke(nameof(DestroyEnemy), 0.01f); ControllerUi.instanse.SetRedAim(); }
+        if (health <= 0) { if (die != null) { die.Invoke(); } Invoke(nameof(DestroyEnemy), 0); ControllerUi.instanse.SetRedAim(); ControllerUi.instanse.ChangesLevelBar(); }
     }
 
     private void DestroyEnemy()
@@ -131,6 +131,7 @@ public class EnemyController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Bullet")

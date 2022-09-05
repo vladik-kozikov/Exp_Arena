@@ -6,6 +6,7 @@ namespace Assets.Scripts.Ui
 {
     public class ControllerUi : MonoBehaviour
     {
+        
         public static ControllerUi instanse;
 
         private DateTime FinalDataTimer;
@@ -13,6 +14,11 @@ namespace Assets.Scripts.Ui
 
         private bool _isAcriveWriteImage;
         private bool _isAcriveRedImage;
+
+        private int CountPlayerExp; //Max = 100;
+        private int LevelExp;
+
+        private const int CountAddLevel = 1;
 
         private void Awake()
         {
@@ -94,6 +100,20 @@ namespace Assets.Scripts.Ui
         {
             UIData.instanse.DeadPanel.SetActive(true);
             Time.timeScale = 0;
+        }
+
+        public void ChangesLevelBar()
+        {
+           int AddPlayerExp = CountAddLevel;
+            if (AddPlayerExp >= 10)
+            {
+                AddPlayerExp += AddPlayerExp - 10;
+                LevelExp++;
+                _uIData.Level.text = LevelExp.ToString();
+            }
+
+            CountPlayerExp += AddPlayerExp;
+            _uIData.LevelBar.fillAmount = AddPlayerExp / 10;
         }
 
     }

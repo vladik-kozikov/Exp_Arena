@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class PMoveController : MonoBehaviour
 {
     //Run
-    public float movementSpeed;
-    public float boostCoefficient;
+    public float movementSpeed = 5;
+    public float boostCoefficient = 5;
     //Jump
     public float gConstant = 10;
     public float fallDownCoefficient;
