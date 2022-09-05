@@ -18,6 +18,8 @@ public class EnemyController : MonoBehaviour
     public UnityEvent die;
     public float health;
 
+    public ParticleSystem deathParticle;
+
     //Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -129,6 +131,8 @@ public class EnemyController : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        ParticleSystem particle = Instantiate(deathParticle, transform.position  /*+Vector3.down*/, deathParticle.transform.rotation);
+        particle.Play();
         Destroy(gameObject);
     }
 

@@ -48,7 +48,7 @@ public class CameraShake : MonoBehaviour
     }
     public static void DefaultShake()
     {
-        Shake(Time.fixedDeltaTime, 1);
+        Shake(0.7f, 0.2f);
     }
     public static void Shake(float duration, float amount)
     {
@@ -59,6 +59,7 @@ public class CameraShake : MonoBehaviour
 
     public IEnumerator cShake(float duration, float amount)
     {
+
         float endTime = Time.time + duration;
 
         while (duration > 0)

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStatesHolder : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerStatesHolder : MonoBehaviour
     public int currentHealth = 3;
     public static Action EventMinusPlayerHp { get; set; }
     public static Action EventToDeadPlayer { get; set; }
+    public UnityEvent recieveDamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class PlayerStatesHolder : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(recieveDamage != null)recieveDamage.Invoke();
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
