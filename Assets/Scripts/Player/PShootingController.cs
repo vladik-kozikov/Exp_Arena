@@ -40,7 +40,7 @@ public class PShootingController : MonoBehaviour
         {
 
 
-            Animator.SetBool("IsShooting", true);
+            //Animator.SetBool("IsShooting", true);
             ShootingSystem.Play();
             Vector3 direction = GetDirection();
 
@@ -96,11 +96,13 @@ public class PShootingController : MonoBehaviour
 
             yield return null;
         }
-        Animator.SetBool("IsShooting", false);
+        //Animator.SetBool("IsShooting", false);
         Trail.transform.position = HitPoint;
         if (MadeImpact)
         {
-            Instantiate(ImpactParticleSystem, HitPoint, Quaternion.LookRotation(HitNormal));
+           ParticleSystem impact = Instantiate(ImpactParticleSystem, HitPoint, Quaternion.LookRotation(HitNormal));
+
+
         }
 
         Destroy(Trail.gameObject, Trail.time);

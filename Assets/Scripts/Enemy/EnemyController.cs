@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     public NavMeshAgent agent;
 
 public Transform player;
-
+   
 public LayerMask whatIsGround, whatIsPlayer;
     public UnityEvent attack;
     public UnityEvent go;
@@ -22,7 +22,9 @@ public Vector3 walkPoint;
 bool walkPointSet;
 public float walkPointRange;
 
-//Attacking
+    //Attacking
+    public int damage;
+    public int damageAddRange;
 public float timeBetweenAttacks;
 bool alreadyAttacked;
 public GameObject projectile;
@@ -37,7 +39,12 @@ private void Awake()
     agent = GetComponent<NavMeshAgent>();
 }
 
-private void Update()
+    private void Start()
+    {
+        
+    }
+
+    private void Update()
 {
     //Check for sight and attack range
     playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -81,9 +88,23 @@ private void ChasePlayer()
 
 private void AttackPlayer()
 {
-        if (attack != null) attack.Invoke();
+        agent.SetDestination(transform.position);
 
-}
+        transform.LookAt(player);
+
+        if (!alreadyAttacked)
+        {
+            if (attack != null) attack.Invoke();
+            player.GetComponent<PlayerStatesHolder>().TakeDamage(damage + Random.Range(-damageAddRange, damageAddRange));
+
+
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    
 
 private void ResetAttack()
 {
