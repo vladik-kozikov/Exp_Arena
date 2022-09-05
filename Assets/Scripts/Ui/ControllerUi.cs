@@ -18,7 +18,7 @@ namespace Assets.Scripts.Ui
         private bool _isAcriveRedImage;
 
         private int CountPlayerExp; //Max = 100;
-        private int LevelExp;
+        private int LevelExp = 1;
 
         private const int CountAddLevel = 1;
         private int CountDeadEnemy;
