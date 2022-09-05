@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5547,7 +5547,7 @@ MonoBehaviour:
   WriteAim: {fileID: 809865562}
   RedAim: {fileID: 315934838}
   Timer: {fileID: 1635912450}
-  LevelBar: {fileID: 0}
+  LevelBar: {fileID: 437294294}
   hpbar:
   - {fileID: 1123040393}
   - {fileID: 620963361}
@@ -25632,7 +25632,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 9065153519764704576, guid: 455ae317e52b7444d818e5a5c6b938a8, type: 3}
   startSpawnDelay: 1
   spawnDelay: 1
-  standartHealth: 10
+  standartHealth: 20
   spawnEnemies:
     m_PersistentCalls:
       m_Calls: []
