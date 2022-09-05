@@ -42,6 +42,9 @@ public class PMoveController : MonoBehaviour
     public GameObject feet;
 
 
+    public AudioSource jumpSound;
+    public AudioSource shootSound;
+
     private Vector3 velocity;
     private Vector3 jumpVelocity;
 
@@ -72,7 +75,8 @@ public class PMoveController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Input.ResetInputAxes();
         jumpVelocity = new Vector3(0, 0, 0);
-
+        
+        jump.AddListener(jumpSound.Play);
         _uIData = UIData.instanse;
     }
 

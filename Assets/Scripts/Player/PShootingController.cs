@@ -27,6 +27,8 @@ public class PShootingController : MonoBehaviour
 
     public float BulletSpeed = 100;
 
+
+    public AudioSource source;
     private Animator Animator;
     private float LastShootTime;
 
@@ -43,6 +45,7 @@ public class PShootingController : MonoBehaviour
 
             //Animator.SetBool("IsShooting", true);
             ShootingSystem.Play();
+            source.Play();
             Vector3 direction = GetDirection();
 
             if (Physics.Raycast(BulletSpawnPoint.position, direction-BulletSpawnPoint.position, out RaycastHit hit, float.MaxValue, Mask))
