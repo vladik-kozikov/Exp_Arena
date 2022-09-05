@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerStatesHolder : MonoBehaviour
 {
-    public float maxHealthPoints;
-    public float ñurrenHealth;
+    public int maxHealthPoints;
+    public int ñurrentHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +16,11 @@ public class PlayerStatesHolder : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void TakeDamage(int damage)
+    {
+        ñurrentHealth -= damage;
+        if (ñurrentHealth <= 0) gameObject.GetComponent<PMoveController>().die.Invoke();
     }
 }

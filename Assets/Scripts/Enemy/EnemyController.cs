@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 { 
@@ -10,7 +11,10 @@ public class EnemyController : MonoBehaviour
 public Transform player;
 
 public LayerMask whatIsGround, whatIsPlayer;
-
+    public UnityEvent attack;
+    public UnityEvent go;
+    public UnityEvent getDamage;
+    public UnityEvent die;
 public float health;
 
 //Patroling
@@ -72,23 +76,26 @@ private void SearchWalkPoint()
 private void ChasePlayer()
 {
     agent.SetDestination(player.position);
+        if (go != null) go.Invoke();
 }
 
 private void AttackPlayer()
 {
+        if (attack != null) attack.Invoke();
 
-        Debug.Log("Attacked");
 }
+
 private void ResetAttack()
 {
     alreadyAttacked = false;
 }
 
-public void TakeDamage(int damage)
-{
-    health -= damage;
+    public void TakeDamage(int damage)
+    {
 
-    if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        health -= damage;
+        if (getDamage != null) {getDamage.Invoke(); }
+        if (health <= 0) { if (die != null) { die.Invoke(); } Invoke(nameof(DestroyEnemy), 0.5f);  }
 }
 private void DestroyEnemy()
 {
@@ -102,5 +109,11 @@ private void OnDrawGizmosSelected()
     Gizmos.color = Color.yellow;
     Gizmos.DrawWireSphere(transform.position, sightRange);
 }
-
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Bullet")
+        {
+            TakeDamage(other.transform.GetComponent<BulletSetup>().damage);
+        }
+    }
 }
