@@ -11,6 +11,7 @@ namespace Assets.Scripts.Ui
         public static ControllerUi instanse;
 
         private DateTime FinalDataTimer;
+        private DateTime StartDataTimer;
         private UIData _uIData;
 
         private bool _isAcriveWriteImage;
@@ -34,6 +35,7 @@ namespace Assets.Scripts.Ui
         {
             _uIData = UIData.instanse;
             FinalDataTimer = DateTime.Now.AddMinutes(10);
+            StartDataTimer = DateTime.Now;
             StartCoroutine(Timer());
             PlayerStatesHolder.EventMinusPlayerHp += MinusHpPlayer;
             PlayerStatesHolder.EventToDeadPlayer += DeadPlayer;
@@ -113,8 +115,8 @@ namespace Assets.Scripts.Ui
         }
         private void EndGame()
         {
-            TimeSpan CurrentTimeLeft =  (DateTime.Now - FinalDataTimer);
-            _uIData.CountTimeSesion.text = $"Final sTime: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
+            TimeSpan CurrentTimeLeft = (DateTime.Now - StartDataTimer);
+            _uIData.CountTimeSesion.text = $"Final Time: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
             _uIData.CountDeadEnemy.text = $"Dead Enemy: {CountDeadEnemy}";
             Cursor.lockState = CursorLockMode.None;
         }
@@ -130,7 +132,9 @@ namespace Assets.Scripts.Ui
             }
 
             CountPlayerExp += AddPlayerExp;
-            _uIData.LevelBar.fillAmount = CountPlayerExp / 10;
+            float CountAddExp = CountPlayerExp;
+            CountAddExp = CountAddExp / 10;
+            _uIData.LevelBar.fillAmount = CountAddExp;
         }
 
         public void ResetScene()
