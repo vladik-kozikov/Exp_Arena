@@ -5,7 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PShootingController : MonoBehaviour
 {
-   
+    public int DamagePlayer;
+
     public bool AddBulletSpread = true;
 
     public float damage;

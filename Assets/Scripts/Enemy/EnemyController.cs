@@ -137,7 +137,6 @@ public class EnemyController : MonoBehaviour
         if (other.transform.tag == "Bullet")
         {
             TakeDamage(other.transform.GetComponent<BulletSetup>().damage);
-            Debug.Log("True");
             ControllerUi.instanse.SetWriteAim();
         }
     }
