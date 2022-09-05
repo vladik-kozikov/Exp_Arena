@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Ui
 {
@@ -19,6 +20,9 @@ namespace Assets.Scripts.Ui
         private int LevelExp;
 
         private const int CountAddLevel = 1;
+        private int CountDeadEnemy;
+
+        
 
         private void Awake()
         {
@@ -44,6 +48,7 @@ namespace Assets.Scripts.Ui
                 if (0 > CurrentTimeLeft.Seconds)
                 {
                     StopCoroutine(Timer());
+                    EndGame();
                     //TODO Add конец уровня.
                 }
                 UIData.instanse.Timer.text = $"{CurrentTimeLeft.Minutes}:{CurrentTimeLeft.Seconds}";
@@ -61,6 +66,8 @@ namespace Assets.Scripts.Ui
             }
 
             StartCoroutine(SetRedImage(_uIData.RedAim.gameObject, _isAcriveRedImage));
+
+            CountDeadEnemy++;
         }
         public void SetWriteAim()
         {
@@ -100,8 +107,18 @@ namespace Assets.Scripts.Ui
         {
             UIData.instanse.DeadPanel.SetActive(true);
             Time.timeScale = 0;
-        }
+            EndGame();
 
+
+        }
+        private void EndGame()
+        {
+            TimeSpan CurrentTimeLeft =  (DateTime.Now - FinalDataTimer);
+            _uIData.CountTimeSesion.text = $"Final sTime: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
+            _uIData.CountDeadEnemy.text = $"Dead Enemy: {CountDeadEnemy}";
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
         public void ChangesLevelBar()
         {
            int AddPlayerExp = CountAddLevel;
@@ -113,8 +130,13 @@ namespace Assets.Scripts.Ui
             }
 
             CountPlayerExp += AddPlayerExp;
-            _uIData.LevelBar.fillAmount = AddPlayerExp / 10;
+            _uIData.LevelBar.fillAmount = CountPlayerExp / 10;
         }
 
+        public void ResetScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Time.timeScale = 1;
+        }
     }
 }
