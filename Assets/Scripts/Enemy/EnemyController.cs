@@ -116,7 +116,7 @@ public class EnemyController : MonoBehaviour
     {
         health -= damage;
         if (getDamage != null) { getDamage.Invoke(); }
-        if (health <= 0) { if (die != null) { die.Invoke(); } Invoke(nameof(DestroyEnemy), 0); ControllerUi.instanse.SetRedAim(); }
+        if (health <= 0) { if (die != null) { die.Invoke(); } Invoke(nameof(DestroyEnemy), 0.01f); ControllerUi.instanse.SetRedAim(); }
     }
 
     private void DestroyEnemy()
