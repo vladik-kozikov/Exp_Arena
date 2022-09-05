@@ -36,6 +36,8 @@ public class EnemyController : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    private bool _isAttack;
+
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
@@ -95,18 +97,24 @@ public class EnemyController : MonoBehaviour
 
         transform.LookAt(player);
 
-        if (!alreadyAttacked)
+        if (!alreadyAttacked && _isAttack == false)
         {
             if (attack != null) attack.Invoke();
-            player.GetComponent<PlayerStatesHolder>().TakeDamage(damage + Random.Range(-damageAddRange, damageAddRange));
-
+            player.GetComponent<PlayerStatesHolder>().TakeDamage(damage);//damage + Random.Range(-damageAddRange, damageAddRange));
+            StartCoroutine(CollDownAttack());
 
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+    private IEnumerator CollDownAttack()
+    {
+        _isAttack = true;
+        yield return new WaitForSeconds(0.5f);
+        _isAttack = false;
 
+    }
     private void ResetAttack()
     {
         alreadyAttacked = false;
