@@ -10,6 +10,8 @@ namespace Assets.Scripts.Ui
         
         public static ControllerUi instanse;
 
+        private UpdateBonusPlayer _updateBonusPlayer;
+
         private DateTime FinalDataTimer;
         private DateTime StartDataTimer;
         private UIData _uIData;
@@ -23,12 +25,12 @@ namespace Assets.Scripts.Ui
         private const int CountAddLevel = 1;
         private int CountDeadEnemy;
 
-        
 
         private void Awake()
         {
             if (instanse != null) Destroy(instanse);
             instanse = this;
+            _updateBonusPlayer = GetComponent<UpdateBonusPlayer>();
         }
 
         private void Start()
@@ -105,20 +107,22 @@ namespace Assets.Scripts.Ui
                 }
             }
         }
+
         private void DeadPlayer()
         {
             UIData.instanse.DeadPanel.SetActive(true);
             Time.timeScale = 0;
             EndGame();
-
-
         }
+
         private void EndGame()
         {
             TimeSpan CurrentTimeLeft = (DateTime.Now - StartDataTimer);
             _uIData.CountTimeSesion.text = $"Final Time: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
             _uIData.CountDeadEnemy.text = $"Dead Enemy: {CountDeadEnemy}";
-            Cursor.lockState = CursorLockMode.None;
+
+            StopAllCoroutines();
+            OnDisableCursor();
         }
         
         public void ChangesLevelBar()
@@ -131,6 +135,7 @@ namespace Assets.Scripts.Ui
                 CountPlayerExp -= 10;
                 LevelExp++;
                 _uIData.Level.text = LevelExp.ToString();
+                UpdateUpLevel();
             }
 
            
@@ -144,5 +149,45 @@ namespace Assets.Scripts.Ui
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             Time.timeScale = 1;
         }
+
+        public void UpdateUpLevel()
+        {
+            UIData.instanse.BakeLevel.SetActive(true);
+
+            _updateBonusPlayer.UpdateBonus();
+            _uIData.PanelUpgradeLevel.SetActive(true);
+
+            this.Invoke("FalsePanel", 0.1f);
+            Time.timeScale = 0.1f;
+        }
+
+        public void ClickToLevelUpBonus(int CurrentBonus)
+        {
+            _updateBonusPlayer.ClickToCurrentBonus(CurrentBonus);
+            _uIData.PanelUpgradeLevel.SetActive(false);
+            OnDisableCursor();
+            
+            Time.timeScale = 1;
+
+        }
+        public void FalsePanel()
+        {
+            UIData.instanse.BakeLevel.SetActive(false);
+
+            OnEnableCursor();
+        }
+
+        private void OnDisableCursor()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        private void OnEnableCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
     }
 }

@@ -5,15 +5,20 @@ using UnityEngine.Events;
 
 public class SpawnPointController : MonoBehaviour
 {
+
+
     public GameObject enemyPrefab;
     public float startSpawnDelay;
     public float spawnDelay;
 
-    
+ 
 
     public float standartHealth;
     float timeBuffer;
-    public UnityEvent spawnEnemies; 
+    public UnityEvent spawnEnemies;
+
+    public GameObject ParentSpawner;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +41,7 @@ public class SpawnPointController : MonoBehaviour
 
     void SpawnEnemies()
     {
-        GameObject enemy = Instantiate(enemyPrefab,gameObject.transform.position, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyPrefab,gameObject.transform.position, Quaternion.identity, ParentSpawner.transform);
         enemy.GetComponent<EnemyController>().health = standartHealth;
     }
 }

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.ConstructorBonusElement;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Ui
 {
-    //TODO Add Timer;
     public class UIData : MonoBehaviour
     {
         public static UIData instanse;
@@ -21,6 +21,12 @@ namespace Assets.Scripts.Ui
 
         public Text CountTimeSesion;
         public Text CountDeadEnemy;
+
+        public GameObject PanelUpgradeLevel;
+        public UpdgradeUIData[] AllLevelUiData;
+        public Bonus[] AllBonus;
+
+        public GameObject BakeLevel;
 
         private void Awake()
         {
