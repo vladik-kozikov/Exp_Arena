@@ -1,3 +1,4 @@
+using InfimaGames.LowPolyShooterPack;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,12 +12,31 @@ public class PlayerStatesHolder : MonoBehaviour
     public static Action EventMinusPlayerHp { get; set; }
     public static Action EventToDeadPlayer { get; set; }
     public UnityEvent recieveDamage;
+
+
+
+    /// <summary>
+    Movement movement;
+    PShootingController shootingController;
+/// </summary>
     // Start is called before the first frame update
     void Start()
     {
+        movement = gameObject.GetComponent<Movement>();
+        shootingController = gameObject.GetComponent<PShootingController>();
         currentHealth = maxHealthPoints;
     }
 
+    public void UpgradeMovement(float Coefficient)
+    {
+        movement.speedRunning *= Coefficient;
+        movement.speedWalking *= Coefficient;
+
+    }
+    public void UpgradeDamage(float Coefficient)
+    {
+        shootingController.damage = (int)(shootingController.damage * Coefficient);
+    }
     // Update is called once per frame
     void Update()
     {

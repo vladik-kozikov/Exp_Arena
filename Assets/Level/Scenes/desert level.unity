@@ -6690,6 +6690,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8163229473250074420}
+        m_TargetAssemblyTypeName: PlayerStatesHolder, Assembly-CSharp
+        m_MethodName: UpgradeDamage
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 1.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &176053997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17653,6 +17665,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441380, guid: 1093da2b134a65e44b0cb16f24de4b22, type: 3}
   m_PrefabInstance: {fileID: 817726826}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &509781010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 509781011}
+  - component: {fileID: 509781013}
+  - component: {fileID: 509781012}
+  m_Layer: 5
+  m_Name: Bake (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &509781011
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509781010}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1929825421}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 862, y: -405.4}
+  m_SizeDelta: {x: 153, y: 84.6}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &509781012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509781010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4088fe93edbb44b4a8a6806c2cc7a99a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &509781013
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509781010}
+  m_CullTransparentMesh: 1
 --- !u!1 &511472153
 GameObject:
   m_ObjectHideFlags: 0
@@ -32549,13 +32637,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951546454}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1580462771}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -35437,7 +35525,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1580462771}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -36021,7 +36109,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1580462771}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -53850,10 +53938,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 951546455}
   - {fileID: 1072301658}
   - {fileID: 1052140995}
   - {fileID: 1610792307}
-  - {fileID: 951546455}
   m_Father: {fileID: 462584476}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54020,7 +54108,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1584541190}
+  m_TargetGraphic: {fileID: 1158722603}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -54033,6 +54121,18 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8163229473250074420}
+        m_TargetAssemblyTypeName: PlayerStatesHolder, Assembly-CSharp
+        m_MethodName: UpgradeMovement
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1.25
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -54925,7 +55025,7 @@ RectTransform:
   - {fileID: 834472870}
   - {fileID: 927847830}
   m_Father: {fileID: 1580462771}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -60173,7 +60273,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1744405139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90d78b114f8025b44a9771033c08e4ba, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1744861131
@@ -66477,6 +66577,7 @@ RectTransform:
   m_Children:
   - {fileID: 1142921876}
   - {fileID: 1733378355}
+  - {fileID: 509781011}
   m_Father: {fileID: 462584476}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75754,6 +75855,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1364625024131056928}
     m_Modifications:
+    - target: {fileID: 3779741032543787607, guid: 26ad978c61683284084b0b27ac796ac5, type: 3}
+      propertyPath: automatic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779741032543787607, guid: 26ad978c61683284084b0b27ac796ac5, type: 3}
+      propertyPath: roundsPerMinutes
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779741032543787607, guid: 26ad978c61683284084b0b27ac796ac5, type: 3}
+      propertyPath: projectileImpulse
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 5039844678251856470, guid: 26ad978c61683284084b0b27ac796ac5, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -77471,14 +77584,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagePlayer: 0
   AddBulletSpread: 0
-  damage: 0
+  damage: 10
   BulletSpreadVariance: {x: 0, y: 0, z: 0}
   directionPoint: {fileID: 923766896}
   ShootingSystem: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   BulletSpawnPoint: {fileID: 740514488}
   ImpactParticleSystem: {fileID: 9064919875212695174, guid: a5e1e2c4d2cd81f4abed6272a2b8187a, type: 3}
   BulletTrail: {fileID: 328621789431213768, guid: 971dbe0f5a773434b8dcc8c9f8676086, type: 3}
-  ShootDelay: 0
+  ShootDelay: 0.5
   Mask:
     serializedVersion: 2
     m_Bits: 2147483647
@@ -77520,7 +77633,7 @@ MonoBehaviour:
   boostCoefficient: 0
   gConstant: 6
   fallDownCoefficient: 1.5
-  jumpHeigth: 13
+  jumpHeigth: 18
   jumpTimeCoefficient: 0.1
   jumpForce: 40
   jumpChargeTime: 1
