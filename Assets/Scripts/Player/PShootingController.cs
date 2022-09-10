@@ -39,13 +39,13 @@ public class PShootingController : MonoBehaviour
 
     public void Shoot()
     {
-        if (LastShootTime + ShootDelay < Time.time)
+        if (LastShootTime + ShootDelay < Time.time && gameObject.GetComponent<PMoveController>().weapon.ammunitionCurrent >0)
         {
 
 
             //Animator.SetBool("IsShooting", true);
             ShootingSystem.Play();
-            source.Play();
+            //source.Play();
             Vector3 direction = GetDirection();
 
             if (Physics.Raycast(BulletSpawnPoint.position, direction-BulletSpawnPoint.position, out RaycastHit hit, float.MaxValue, Mask))

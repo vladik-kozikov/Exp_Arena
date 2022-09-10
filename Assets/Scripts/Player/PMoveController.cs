@@ -1,4 +1,5 @@
 using Assets.Scripts.Ui;
+using InfimaGames.LowPolyShooterPack;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,14 +39,13 @@ public class PMoveController : MonoBehaviour
     //public UnityEvent recieveDamage;
     public UnityEvent die;
 
-    public GameObject cameraObject;
-    public GameObject feet;
+    public Weapon weapon;
 
 
     public AudioSource jumpSound;
     public AudioSource shootSound;
 
-    private Vector3 velocity;
+    public Vector3 velocity;
     private Vector3 jumpVelocity;
 
     float _jumpForce = 0;
@@ -54,6 +54,7 @@ public class PMoveController : MonoBehaviour
     float jumpBufferTime = 0;
     bool isGrounded = false;
     private Rigidbody rb;
+    private Character character;
 
     private UIData _uIData;
 
@@ -63,11 +64,13 @@ public class PMoveController : MonoBehaviour
         jump.AddListener(Jump);
         dash.AddListener(InstantSpeedUp);
         rb = gameObject.GetComponent<Rigidbody>();
+        move.AddListener(MoveFixed);
 
     }
     // Start is called before the first frame update
     void Start()
     {
+        character = gameObject.GetComponent<Character>();
         jumpBufferTime = jumpChargeTime;
         if (!GroundCheck()) _gconst = gConstant * fallDownCoefficient;
         else _gconst = gConstant;
@@ -84,6 +87,7 @@ public class PMoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(!isJumpChargable)jumpForce = jumpHeigth / jumpChargeTime;
         /*if(isJumpChargable)*/
         ChargeJump();
@@ -104,23 +108,15 @@ public class PMoveController : MonoBehaviour
 
         if (Input.GetKeyDown(shootButton) && shoot != null) shoot.Invoke();
         isGrounded = GroundCheck();
-        rb.velocity = velocity;
+        //rb.velocity = velocity;
     }
 
     private void FixedUpdate()
     {
+
         if (move != null) move.Invoke();
     }
      
-    void Move()
-    {
-
-    velocity.x = ((Vector3.up*jumpLength+gameObject.transform.forward*Input.GetAxis("Vertical") + gameObject.transform.right*Input.GetAxis("Horizontal"))*movementSpeed*Time.deltaTime+Vector3.down*gConstant*Time.deltaTime).x;
-    velocity.z = ((Vector3.up*jumpLength+gameObject.transform.forward*Input.GetAxis("Vertical") + gameObject.transform.right*Input.GetAxis("Horizontal"))*movementSpeed*Time.deltaTime+Vector3.down*gConstant*Time.deltaTime).z;
-        velocity.y += jumpLength;
-        if (jumpLength > 0) jumpLength = jumpLength - jumpLength * Time.deltaTime * 100f;
-        else jumpLength = 0;
-    }
 
     void MoveFixed()
     {
@@ -160,7 +156,7 @@ public class PMoveController : MonoBehaviour
 
 
 
-    void CameraRotation()
+/*    void CameraRotation()
     {
         var deltaMouse = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
@@ -177,11 +173,11 @@ public class PMoveController : MonoBehaviour
 
         transform.Rotate(Vector3.up, deltaRotation.x);
         cameraObject.transform.localRotation = Quaternion.Euler(pitchAngle, 0.0f, 0.0f);
-    }
+    }*/
 
     void CameraRotate()
     {
-        CameraRotation();
+       // CameraRotation();
     }
     bool GroundCheck()
     {
