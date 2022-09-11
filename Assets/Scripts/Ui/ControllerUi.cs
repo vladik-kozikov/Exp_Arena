@@ -28,7 +28,8 @@ namespace Assets.Scripts.Ui
 
         private void Awake()
         {
-            if (instanse != null) Destroy(instanse);
+            Debug.Log("blyat");
+     //       if (instanse != null) Destroy(instanse);
             instanse = this;
             _updateBonusPlayer = GetComponent<UpdateBonusPlayer>();
         }
@@ -110,6 +111,7 @@ namespace Assets.Scripts.Ui
 
         private void DeadPlayer()
         {
+
             UIData.instanse.DeadPanel.SetActive(true);
             Time.timeScale = 0;
             EndGame();
@@ -117,11 +119,12 @@ namespace Assets.Scripts.Ui
 
         private void EndGame()
         {
+            
             TimeSpan CurrentTimeLeft = (DateTime.Now - StartDataTimer);
-            _uIData.CountTimeSesion.text = $"Final Time: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
-            _uIData.CountDeadEnemy.text = $"Dead Enemy: {CountDeadEnemy}";
+            UIData.instanse.CountTimeSesion.text = $"Final Time: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
+            UIData.instanse.CountDeadEnemy.text = $"Dead Enemy: {CountDeadEnemy}";
 
-            StopAllCoroutines();
+
             OnDisableCursor();
         }
         
@@ -146,7 +149,7 @@ namespace Assets.Scripts.Ui
 
         public void ResetScene()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
             Time.timeScale = 1;
         }
 

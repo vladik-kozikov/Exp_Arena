@@ -53,13 +53,16 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        //Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if (Time.timeScale == 1)
+        {//Check for sight and attack range
+            playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+            if (!playerInSightRange && !playerInAttackRange) Patroling();
+            if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+            if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        }
     }
 
     private void Patroling()
@@ -102,6 +105,7 @@ public class EnemyController : MonoBehaviour
         if (!alreadyAttacked && _isAttack == false)
         {
             if (attack != null) attack.Invoke();
+            player = GameObject.Find("Player").transform;
             player.GetComponent<PlayerStatesHolder>().TakeDamage(damage);//damage + Random.Range(-damageAddRange, damageAddRange));
             StartCoroutine(CollDownAttack());
 

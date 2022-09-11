@@ -79,7 +79,7 @@ public class PMoveController : MonoBehaviour
         Input.ResetInputAxes();
         jumpVelocity = new Vector3(0, 0, 0);
         
-        jump.AddListener(jumpSound.Play);
+        //jump.AddListener(jumpSound.Play);
         _uIData = UIData.instanse;
     }
 
@@ -93,8 +93,8 @@ public class PMoveController : MonoBehaviour
         ChargeJump();
         CameraRotate();
 
-        if (Input.GetKeyDown(shootButton) && shoot != null) shoot.Invoke();
-
+        if ((Input.GetKey(shootButton)) && shoot != null) shoot.Invoke();
+        
         if (Input.GetKeyUp(dashButton) && dash != null) InstantSlowDown();
         if (Input.GetKeyDown(dashButton) && dash != null) dash.Invoke();
 
@@ -215,8 +215,9 @@ public class PMoveController : MonoBehaviour
 
         if (GroundCheck())
         {
+            jumpSound.Play();
            jumpLength = (jumpHeigth / jumpTimeCoefficient) * (jumpBufferTime / jumpChargeTime);
-
+            
 
         }
         //if(isJumpChargable)
