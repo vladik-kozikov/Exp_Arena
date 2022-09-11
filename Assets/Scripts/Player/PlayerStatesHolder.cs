@@ -49,7 +49,8 @@ public class PlayerStatesHolder : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            EventToDeadPlayer?.Invoke();
+            Debug.Log(currentHealth);
+            if(EventToDeadPlayer!= null)EventToDeadPlayer?.Invoke();
         }
         EventMinusPlayerHp?.Invoke();
 

@@ -30,9 +30,13 @@ namespace Assets.Scripts.Ui
 
         private void Awake()
         {
-            if (instanse != null) Destroy(instanse);
+            //if (instanse != null) Destroy(instanse);
             instanse = this;
         }
-       
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1)) MainAim.gameObject.SetActive(false);
+            if (Input.GetKeyUp(KeyCode.Mouse1)) MainAim.gameObject.SetActive(true);
+        }
     }
 }
