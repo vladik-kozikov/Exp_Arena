@@ -105,6 +105,7 @@ public class EnemyController : MonoBehaviour
         if (!alreadyAttacked && _isAttack == false)
         {
             if (attack != null) attack.Invoke();
+            player = GameObject.Find("Player").transform;
             player.GetComponent<PlayerStatesHolder>().TakeDamage(damage);//damage + Random.Range(-damageAddRange, damageAddRange));
             StartCoroutine(CollDownAttack());
 

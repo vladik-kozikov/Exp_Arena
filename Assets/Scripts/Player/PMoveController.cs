@@ -217,7 +217,7 @@ public class PMoveController : MonoBehaviour
         {
             jumpSound.Play();
            jumpLength = (jumpHeigth / jumpTimeCoefficient) * (jumpBufferTime / jumpChargeTime);
-            if (jumpLength < (jumpHeigth / jumpTimeCoefficient) *4/ 5) jumpLength = (jumpHeigth / jumpTimeCoefficient) *4/5 ;
+            
 
         }
         //if(isJumpChargable)

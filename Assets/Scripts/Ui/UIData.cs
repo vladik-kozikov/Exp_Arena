@@ -32,10 +32,13 @@ namespace Assets.Scripts.Ui
         {
             //if (instanse != null) Destroy(instanse);
             instanse = this;
+            //Object.DontDestroyOnLoad(gameObject);
         }
+
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1)) MainAim.gameObject.SetActive(false);
+
+                if (Input.GetKeyDown(KeyCode.Mouse1)) MainAim.gameObject.SetActive(false);
             if (Input.GetKeyUp(KeyCode.Mouse1)) MainAim.gameObject.SetActive(true);
         }
     }

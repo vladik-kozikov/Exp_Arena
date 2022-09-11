@@ -119,10 +119,10 @@ namespace Assets.Scripts.Ui
 
         private void EndGame()
         {
-            StopAllCoroutines();
+            
             TimeSpan CurrentTimeLeft = (DateTime.Now - StartDataTimer);
-            _uIData.CountTimeSesion.text = $"Final Time: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
-            _uIData.CountDeadEnemy.text = $"Dead Enemy: {CountDeadEnemy}";
+            UIData.instanse.CountTimeSesion.text = $"Final Time: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
+            UIData.instanse.CountDeadEnemy.text = $"Dead Enemy: {CountDeadEnemy}";
 
 
             OnDisableCursor();
