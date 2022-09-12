@@ -10,7 +10,7 @@ public class PlayerStatesHolder : MonoBehaviour
     public int maxHealthPoints = 3;
     public int currentHealth = 3;
     public static Action EventMinusPlayerHp { get; set; }
-    public static Action EventToDeadPlayer { get; set; }
+    public static Action<bool> EventToDeadPlayer { get; set; }
     public UnityEvent recieveDamage;
 
 
@@ -50,7 +50,7 @@ public class PlayerStatesHolder : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log(currentHealth);
-            if(EventToDeadPlayer!= null)EventToDeadPlayer?.Invoke();
+            if(EventToDeadPlayer!= null)EventToDeadPlayer?.Invoke(true);
         }
         EventMinusPlayerHp?.Invoke();
 
