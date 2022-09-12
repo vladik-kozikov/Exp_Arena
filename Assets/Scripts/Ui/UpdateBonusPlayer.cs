@@ -23,8 +23,6 @@ namespace Assets.Scripts.Ui
 
         }
 
-      
-
         public void ClickToCurrentBonus(int BonusID)
         {
             UpdateStatePlayer?.Invoke(BonusID);
