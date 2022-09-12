@@ -5,17 +5,17 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
+
+[RequireComponent(typeof(AudioSource))]
 public class EnemyController : MonoBehaviour
 {
+    #region FIELDS
     public NavMeshAgent agent;
 
     public Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
-    public UnityEvent attack;
-    public UnityEvent go;
-    public UnityEvent getDamage;
-    public UnityEvent die;
+
     public float health;
 
     public ParticleSystem deathParticle;
@@ -38,12 +38,25 @@ public class EnemyController : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+
+    private UnityEvent attack;
+    private UnityEvent go;
+    private UnityEvent getDamage;
+    private UnityEvent die;
     private bool _isAttack;
 
+
+
+
+    AudioSource _audioSource;
+    #endregion
+
+    #region UNITY
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -64,7 +77,9 @@ public class EnemyController : MonoBehaviour
             if (playerInAttackRange && playerInSightRange) AttackPlayer();
         }
     }
+    #endregion
 
+    #region STATES
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();
@@ -114,8 +129,12 @@ public class EnemyController : MonoBehaviour
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
+    #endregion
+
+    #region ACTIONS
     private IEnumerator CollDownAttack()
     {
+        
         _isAttack = true;
         yield return new WaitForSeconds(0.5f);
         _isAttack = false;
@@ -152,8 +171,11 @@ public class EnemyController : MonoBehaviour
     {
         if (other.transform.tag == "Bullet")
         {
+            _audioSource.Stop();
+            _audioSource.Play();
             TakeDamage(other.transform.GetComponent<BulletSetup>().damage);
             ControllerUi.instanse.SetWriteAim();
         }
     }
+    #endregion
 }

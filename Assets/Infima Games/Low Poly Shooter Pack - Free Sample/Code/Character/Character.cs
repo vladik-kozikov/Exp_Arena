@@ -307,7 +307,7 @@ namespace InfimaGames.LowPolyShooterPack
 			characterAnimator.CrossFade(stateName, 0.05f, layerOverlay, 0);
 		}
 
-		private void PlayReloadAnimation()
+		public void PlayReloadAnimation()
 		{
 			#region Animation
 
