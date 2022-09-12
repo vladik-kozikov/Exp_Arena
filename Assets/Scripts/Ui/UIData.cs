@@ -21,6 +21,8 @@ namespace Assets.Scripts.Ui
 
         public Text CountTimeSesion;
         public Text CountDeadEnemy;
+        public Text CountRewardPlayer;
+
 
         public GameObject PanelUpgradeLevel;
         public UpdgradeUIData[] AllLevelUiData;
