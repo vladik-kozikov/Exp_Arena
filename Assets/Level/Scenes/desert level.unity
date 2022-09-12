@@ -5883,6 +5883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057d7b145f9fb7e41ba53f4b10a5ab42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllTime: 10
 --- !u!4 &163389225
 Transform:
   m_ObjectHideFlags: 0
@@ -5924,6 +5925,7 @@ MonoBehaviour:
   EndPanel: {fileID: 1602353974}
   CountTimeSesion: {fileID: 910336811}
   CountDeadEnemy: {fileID: 910336810}
+  CountRewardPlayer: {fileID: 0}
   PanelUpgradeLevel: {fileID: 1580462770}
   AllLevelUiData:
   - {fileID: 2066060420}
@@ -11561,7 +11563,7 @@ RectTransform:
   m_GameObject: {fileID: 315934836}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 780352823}
@@ -11585,7 +11587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6039216}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -35817,7 +35819,7 @@ RectTransform:
   m_GameObject: {fileID: 1060051721}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 780352823}
@@ -35841,7 +35843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6039216}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

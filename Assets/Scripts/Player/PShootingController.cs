@@ -1,4 +1,5 @@
 
+using InfimaGames.LowPolyShooterPack;
 using System.Collections;
 using UnityEngine;
 
@@ -28,18 +29,35 @@ public class PShootingController : MonoBehaviour
     public float BulletSpeed = 100;
 
 
-    public AudioSource source;
-    private Animator Animator;
-    private float LastShootTime;
+    float reloadTimeBuffer = -3;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R)) reloadTimeBuffer = Time.realtimeSinceStartup;
+        if (gameObject.GetComponent<PMoveController>().weapon.ammunitionCurrent == 0) 
+        {
 
+            _character.PlayReloadAnimation();
+
+            gameObject.GetComponent<PMoveController>().weapon.FillAmmunition(10);
+            reloadTimeBuffer = Time.realtimeSinceStartup;
+
+        }
+        //Debug.Log(_character.characterAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+    }
+    
+    public AudioSource source;
+
+    private float LastShootTime;
+    private Character _character;
     private void Awake()
     {
-        Animator = GetComponent<Animator>();
+        _character = GetComponent<Character>();
     }
 
     public void Shoot()
     {
-        if (LastShootTime + ShootDelay < Time.time && gameObject.GetComponent<PMoveController>().weapon.ammunitionCurrent >0)
+        
+        if (LastShootTime + ShootDelay < Time.time && gameObject.GetComponent<PMoveController>().weapon.ammunitionCurrent >0&& Time.realtimeSinceStartup - reloadTimeBuffer >= 1.63)
         {
 
 
