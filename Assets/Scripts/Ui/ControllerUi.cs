@@ -28,8 +28,7 @@ namespace Assets.Scripts.Ui
 
         private void Awake()
         {
-            Debug.Log("blyat");
-     //       if (instanse != null) Destroy(instanse);
+            if (instanse != null) Destroy(instanse);
             instanse = this;
             _updateBonusPlayer = GetComponent<UpdateBonusPlayer>();
         }
@@ -41,7 +40,7 @@ namespace Assets.Scripts.Ui
             StartDataTimer = DateTime.Now;
             StartCoroutine(Timer());
             PlayerStatesHolder.EventMinusPlayerHp += MinusHpPlayer;
-            PlayerStatesHolder.EventToDeadPlayer += DeadPlayer;
+            PlayerStatesHolder.EventToDeadPlayer += DeadOrWinPlayer;
             
         }
         private IEnumerator Timer()
@@ -53,15 +52,14 @@ namespace Assets.Scripts.Ui
                 if (0 > CurrentTimeLeft.Seconds)
                 {
                     StopCoroutine(Timer());
-                    EndGame();
-                    //TODO Add конец уровня.
+                    DeadOrWinPlayer(false);
                 }
                 UIData.instanse.Timer.text = $"{CurrentTimeLeft.Minutes}:{CurrentTimeLeft.Seconds}";
                 yield return new WaitForSeconds(1f);
 
             }
         }
-        //TODO Присмотреться, возможно отключать при этом writeAim.
+
         public void SetRedAim()
         {
             if (_isAcriveRedImage)
@@ -109,11 +107,13 @@ namespace Assets.Scripts.Ui
             }
         }
 
-        private void DeadPlayer()
+        private void DeadOrWinPlayer(bool isDead)
         {
-
-            UIData.instanse.DeadPanel.SetActive(true);
+            UIData.instanse.EndPanel.SetActive(true);
+            UIData.instanse.DeadImage.SetActive(isDead);
+            UIData.instanse.DeadImage.SetActive(!isDead);
             Time.timeScale = 0;
+
             EndGame();
         }
 
@@ -124,8 +124,7 @@ namespace Assets.Scripts.Ui
             UIData.instanse.CountTimeSesion.text = $"Final Time: { CurrentTimeLeft.Minutes}:{ CurrentTimeLeft.Seconds}";
             UIData.instanse.CountDeadEnemy.text = $"Dead Enemy: {CountDeadEnemy}";
 
-
-            OnDisableCursor();
+            OnEnableCursor();
         }
         
         public void ChangesLevelBar()
@@ -173,6 +172,7 @@ namespace Assets.Scripts.Ui
             Time.timeScale = 1;
 
         }
+
         public void FalsePanel()
         {
             UIData.instanse.BakeLevel.SetActive(false);
@@ -191,6 +191,5 @@ namespace Assets.Scripts.Ui
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-
     }
 }
