@@ -17,7 +17,7 @@ namespace Assets.Scripts.Ui
 
         public Text Level;
 
-        public GameObject DeadPanel;
+        public GameObject EndPanel;
 
         public Text CountTimeSesion;
         public Text CountDeadEnemy;
@@ -28,16 +28,17 @@ namespace Assets.Scripts.Ui
 
         public GameObject BakeLevel;
 
+        public GameObject DeadImage;
+        public GameObject SurvivedImage;
+
         private void Awake()
         {
-            //if (instanse != null) Destroy(instanse);
+            if (instanse != null) Destroy(instanse);
             instanse = this;
-            //Object.DontDestroyOnLoad(gameObject);
         }
 
         private void Update()
         {
-
                 if (Input.GetKeyDown(KeyCode.Mouse1)) MainAim.gameObject.SetActive(false);
             if (Input.GetKeyUp(KeyCode.Mouse1)) MainAim.gameObject.SetActive(true);
         }

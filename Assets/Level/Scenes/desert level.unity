@@ -5921,7 +5921,7 @@ MonoBehaviour:
   - {fileID: 620963361}
   - {fileID: 1012873865}
   Level: {fileID: 840783061}
-  DeadPanel: {fileID: 1602353974}
+  EndPanel: {fileID: 1602353974}
   CountTimeSesion: {fileID: 910336811}
   CountDeadEnemy: {fileID: 910336810}
   PanelUpgradeLevel: {fileID: 1580462770}
@@ -5934,6 +5934,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0f20c6d826d857a4c9acfcb2e4ba21e9, type: 2}
   - {fileID: 11400000, guid: c10739450b89fde459d9a272cdfc4e88, type: 2}
   BakeLevel: {fileID: 951546454}
+  DeadImage: {fileID: 1723751091}
+  SurvivedImage: {fileID: 910336812}
 --- !u!114 &163389227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31006,6 +31008,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &910336812 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3698289830275170162, guid: 7fdfcdefe1a71754f83aa8c8bbb78617, type: 3}
+  m_PrefabInstance: {fileID: 910336808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &910782177
 GameObject:
   m_ObjectHideFlags: 0
@@ -59299,6 +59306,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1723751091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 297181915424071881, guid: 7fdfcdefe1a71754f83aa8c8bbb78617, type: 3}
+  m_PrefabInstance: {fileID: 910336808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1724964378
 PrefabInstance:
   m_ObjectHideFlags: 0
