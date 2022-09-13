@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c15d8b10776caf4bac18039a73411a2, type: 3}
-  m_Name: Three
+  m_Name: Impulse_1
   m_EditorClassIdentifier: 
-  NameBonus: Runner
-  Description: Movement Speed +25%
-  BonusImage: {fileID: 21300000, guid: e304e8b9ab764354896b3f22218df1ed, type: 3}
+  NameBonus: Impulse-Shmimpulse
+  Description: Creating a repulsive impulse once in 8 sec
+  BonusImage: {fileID: 21300000, guid: 446f635295c542f4a9a83be056ab2524, type: 3}
   Frame: {fileID: 21300000, guid: 8ea5cce7985b8f24588e57e08ea83aee, type: 3}
+  SaveCurrentBonus:
+    improvements: 6
+    RangeToSelectionBonus: 0

@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c15d8b10776caf4bac18039a73411a2, type: 3}
-  m_Name: One
+  m_Name: BigBoy_1
   m_EditorClassIdentifier: 
-  NameBonus: Bullet Hell
-  Description: Bullet Damage +20%
-  BonusImage: {fileID: 21300000, guid: cab1a9c3d90f41949870cd976b6b5248, type: 3}
+  NameBonus: Big Boy
+  Description: Max HP +1
+  BonusImage: {fileID: 21300000, guid: 449d22342576f0046aa7aad7fddd592a, type: 3}
   Frame: {fileID: 21300000, guid: 8ea5cce7985b8f24588e57e08ea83aee, type: 3}
+  SaveCurrentBonus:
+    improvements: 4
+    RangeToSelectionBonus: 0
